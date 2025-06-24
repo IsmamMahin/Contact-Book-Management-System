@@ -1,16 +1,20 @@
+# search_contact.py
 def search_contact(contacts, search_term):
-    #if search_term in contacts:
-    #    contact = contacts[search_term]
-    #    print("Seach result:")
-     #   print(f'Name: {name}')
-    #    print(f'Phone number: {phone_number}')
-    
+    found_contacts = {}
+    for name, details in contacts.items():
+        if search_term.lower() in name.lower() or \
+           search_term.lower() in details.get('email', '').lower() or \
+           search_term.lower() in details.get('phone_number', '').lower():
+            found_contacts[name] = details
 
-    if search_term in contacts:
-        contact_details = contacts[search_term]
-        print(f"Found contact by Name: {search_term}")
-        print(f"  Name: {search_term}") # The search_term itself is the name
-        print(f"  Phone number: {contact_details.get('phone_number', 'N/A')}")
-        print(f"  Email: {contact_details.get('email', 'N/A')}")
-        print(f"  Address: {contact_details.get('address', 'N/A')}")
-        return # Exit the function after finding a direct match
+    if found_contacts:
+        print("\n=========== SEARCH RESULTS ===========")
+        for name, details in found_contacts.items():
+            print(f"Name: {name}")
+            print(f"Phone: {details.get('phone_number', 'N/A')}")
+            print(f"Email: {details.get('email', 'N/A')}")
+            print(f"Address: {details.get('address', 'N/A')}")
+            print("------------------------------------")
+        print("====================================")
+    else:
+        print(f"No contacts found for '{search_term}'.")
