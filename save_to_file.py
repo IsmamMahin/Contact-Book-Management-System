@@ -15,7 +15,6 @@ def save_contacts_to_file(contacts, filename="contacts.csv"):
                     'Email': contact_details.get('email', ''),
                     'Address': contact_details.get('address', '')
                 })
-        print(f"Contacts saved to {filename} successfully.")
     except IOError as e:
         print(f"Error saving contacts to CSV: {e}")
 
@@ -33,7 +32,6 @@ def load_contacts_from_file(filename="contacts.csv"):
                         'email': row.get('Email', ''),
                         'address': row.get('Address', '')
                     }
-        print(f"Contacts loaded from {filename}.")
     except FileNotFoundError:
         print(f"No existing contacts file found at {filename}. Starting with an empty contact list.")
     except Exception as e:
