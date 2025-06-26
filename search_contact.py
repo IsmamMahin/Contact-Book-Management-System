@@ -1,19 +1,25 @@
-# search_contact.py
+# Function to search a contact
+
 def search_contact(contacts, search_term):
     found_contacts = {}
-    for name, details in contacts.items():
-        if search_term.lower() in name.lower() or \
-           search_term.lower() in details.get('email', '').lower() or \
-           search_term.lower() in details.get('phone_number', '').lower():
-            found_contacts[name] = details
+    for phone_num, details in contacts.items():
+        contact_name = details.get('name', '')
+        contact_email = details.get('email', '')
+        contact_address = details.get('address', '')
+
+        # Check for search_term in name, email, or phone_num 
+        if search_term.lower() in contact_name.lower() or \
+           search_term.lower() in contact_email.lower() or \
+           search_term.lower() in phone_num.lower(): 
+            found_contacts[phone_num] = details 
 
     if found_contacts:
         print("\n=========== SEARCH RESULTS ===========")
-        for name, details in found_contacts.items():
-            print(f"Name: {name}")
-            print(f"Phone: {details.get('phone_number', 'N/A')}")
-            print(f"Email: {details.get('email', 'N/A')}")
-            print(f"Address: {details.get('address', 'N/A')}")
+        for phone_num_found, details_found in found_contacts.items():
+            print(f"Name: {details_found.get('name', 'N/A')}")    
+            print(f"Phone: {phone_num_found}")         
+            print(f"Email: {details_found.get('email', 'N/A')}")
+            print(f"Address: {details_found.get('address', 'N/A')}")
             print("------------------------------------")
         print("====================================")
     else:

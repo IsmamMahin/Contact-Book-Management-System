@@ -1,36 +1,35 @@
-# save_contacts.py
 import csv
 
+# Functions to save contacts from contacts.csv file
 def save_contacts_to_file(contacts, filename="contacts.csv"):
-    """Saves the contacts dictionary to a CSV file."""
     try:
         with open(filename, 'w', newline='') as csvfile:
             fieldnames = ['Name', 'Phone Number', 'Email', 'Address']
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
 
             writer.writeheader()
-            for name, details in contacts.items():
+            for phone_num, contact_details in contacts.items():
                 writer.writerow({
-                    'Name': name,
-                    'Phone Number': details.get('phone_number', ''),
-                    'Email': details.get('email', ''),
-                    'Address': details.get('address', '')
+                    'Name': contact_details.get('name', ''),
+                    'Phone Number': phone_num,             
+                    'Email': contact_details.get('email', ''),
+                    'Address': contact_details.get('address', '')
                 })
         print(f"Contacts saved to {filename} successfully.")
     except IOError as e:
         print(f"Error saving contacts to CSV: {e}")
 
+# Functionsload contacts from contacts.csv file
 def load_contacts_from_file(filename="contacts.csv"):
-    """Loads contacts from a CSV file into a dictionary."""
     contacts = {}
     try:
         with open(filename, 'r', newline='') as csvfile:
             reader = csv.DictReader(csvfile)
             for row in reader:
-                name = row.get('Name')
-                if name:
-                    contacts[name] = {
-                        'phone_number': row.get('Phone Number', ''),
+                phone_number = row.get('Phone Number')
+                if phone_number:
+                    contacts[phone_number] = {
+                        'name': row.get('Name', ''),    
                         'email': row.get('Email', ''),
                         'address': row.get('Address', '')
                     }

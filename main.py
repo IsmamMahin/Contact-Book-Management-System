@@ -11,17 +11,16 @@ contacts = load_contacts_from_file()
 while True:
 #print("Menu is loaded")
     menu()
-    choice = int(input("Enter your choice: "))
+    choice = input("Enter your choice: ")
     
-    # try:
-    #     choice = int(choice_input) # Convert the string to an integer
-    # except ValueError:
-    #     print("Invalid input. Please enter a number.")
-    #     continue # Go back to the beginning of the loop
+    try:
+        choice = int(choice) # Convert the string to an integer
+    except ValueError:
+        print("Invalid input. Please enter a number.")
+        continue # Go back to the beginning of the loop
 
 
     if choice == 1:
-        print("DEBUG: Calling add_contact...") # Diagnostic print
         add_contact(contacts)
         save_contacts_to_file(contacts)
 
@@ -33,6 +32,7 @@ while True:
         search_contact(contacts, search_term)
 
     elif choice == 4:
+        contacts = load_contacts_from_file()
         remove_contact(contacts)
 
     elif choice == 5:

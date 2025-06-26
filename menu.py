@@ -1,3 +1,4 @@
+#Menu of the system
 def menu():
     print("Welcome to the Contact Book CLI System!")
     print("Loading contacts from contacts.csv... Done!")
